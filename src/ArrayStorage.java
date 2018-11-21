@@ -11,6 +11,7 @@ public class ArrayStorage {
     //очистка массива
     void clear() {
         Arrays.fill(storage, null);
+        size = 0;
     }
 
     //сохранение резюме в массив
@@ -47,6 +48,7 @@ public class ArrayStorage {
         for (int i = index + 1; i < storage.length; i++){
             storage[i - 1] = storage[i];
         }
+        size--;
     }
 
     /**
@@ -54,7 +56,7 @@ public class ArrayStorage {
      */
     Resume[] getAll() {
         int index = 0;
-        for(int i = 0; i < storage.length-1; i++){
+        for(int i = 0; i < storage.length; i++){
             if (storage[i]== null){
                 index = i;
                 break;
