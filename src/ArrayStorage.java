@@ -6,6 +6,7 @@ import java.util.Arrays;
  */
 public class ArrayStorage {
     Resume[] storage = new Resume[10000];
+    int size = 0;
 
     //очистка массива
     void clear() {
@@ -14,40 +15,37 @@ public class ArrayStorage {
 
     //сохранение резюме в массив
     void save(Resume r) {
-        Resume[] temp = new Resume[10000];
-        System.arraycopy(storage,0, temp, 1, storage.length - 1);
-        temp[0] = r;
-        System.arraycopy(temp,0, storage, 0, temp.length);
+        for (int i = 0; i < storage.length; i++){
+            if (storage[i] == null){
+                storage[i] = r;
+                size++;
+                break;
+            }
+        }
     }
 
     //получение резюме из массива
     Resume get(String uuid) {
-        Resume requestResume = null;
-        try {
-            for (Resume r : storage) {
-                if (r.uuid.equals(uuid)){
-                    requestResume = r;
-                    break;
-                }
-            }
-        } catch (Exception e) {
+        for (int i = 0; i < size; i++) {
+            if (storage[i].uuid.equals(uuid))
+                return storage[i];
         }
-        return requestResume;
+        return null;
     }
 
     //удаление резюме из массива
     void delete(String uuid) {
         int index = 0;
-        //Resume requestResume = null;
-        for (Resume r : storage){
-            if (r.uuid.equals(uuid)) {
-                index = Arrays.asList(storage).indexOf(r);
-                storage[index] = null;
+        for (int i = 0; i < storage.length; i++){
+            if(storage[i].uuid.equals(uuid)){
+                storage[i] = null;
+                index = i;
                 break;
             }
         }
-        for (int b = index + 1; b < storage.length; b++){
-            storage[b - 1] = storage[b];
+        // сдвиг всех элекментов на один элемент назад
+        for (int i = index + 1; i < storage.length; i++){
+            storage[i - 1] = storage[i];
         }
     }
 
@@ -68,13 +66,6 @@ public class ArrayStorage {
     }
 
     int size() {
-        int index = 0;
-        for(int i = 0; i < storage.length-1; i++){
-            if (storage[i]== null){
-                index = i;
-                break;
-            }
-        }
-        return index;
+        return size;
     }
 }
