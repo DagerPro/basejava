@@ -1,5 +1,10 @@
+package ru.dager;
+
+import ru.dager.webapp.model.Resume;
+import ru.dager.webapp.storage.ArrayStorage;
+
 /**
- * Test for your ArrayStorage implementation
+ * Test for your ru.dager.webapp.storage.ArrayStorage implementation
  */
 public class MainTestArrayStorage {
     static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
