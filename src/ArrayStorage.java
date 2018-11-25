@@ -27,7 +27,6 @@ public class ArrayStorage {
             return;
         }
         for (int i = 0; i <= size; i++){
-            String uuid = r.uuid;
             if ((storage[i] == null) && (!(storage[i].uuid.equals(r.uuid)))){
                 storage[i] = r;
                 break;
