@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
@@ -14,41 +13,54 @@ public class ArrayStorage {
         size = 0;
     }
 
+    public void update(Resume r){
+        for (int i = 0; i < size; i++){
+            if (!storage[i].uuid.equals(r.uuid))
+                System.out.println("ERROR: resume is absent");
+        }
+    }
+
     //сохранение резюме в массив
     void save(Resume r) {
-        for (int i = 0; i < storage.length; i++){
-            if (storage[i] == null){
+        if (size == 10000) {
+            System.out.println("ERROR: storage is full");
+            return;
+        }
+        for (int i = 0; i <= size; i++){
+            String uuid = r.uuid;
+            if ((storage[i] == null) && (!(storage[i].uuid.equals(r.uuid)))){
                 storage[i] = r;
-                size++;
                 break;
             }
+            else System.out.println("ERROR: resume allready exist");
         }
+        size++;
     }
 
     //получение резюме из массива
     Resume get(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(uuid))
+        for (int i = 0; i <= size; i++){
+            if (storage[i].uuid.equals(uuid)){
                 return storage[i];
+            }
+            else if (i == size){
+                System.out.println("ERROR: resume is absent");
+            }
         }
         return null;
     }
 
     //удаление резюме из массива
-    void delete(String uuid) {
-        int index = 0;
-        for (int i = 0; i < storage.length; i++){
+    void delete(String uuid){
+        for (int i = 0; i <= size; i++){
             if(storage[i].uuid.equals(uuid)){
-                storage[i] = null;
-                index = i;
+                storage[i] = storage[size -1];
                 break;
             }
+            else if (i == size){
+                System.out.println("ERROR: resume is absent");
+            }
         }
-        // сдвиг всех элекментов на один элемент назад
-        for (int i = index + 1; i < storage.length; i++){
-            storage[i - 1] = storage[i];
-        }
-        size--;
     }
 
     /**
@@ -56,7 +68,7 @@ public class ArrayStorage {
      */
     Resume[] getAll() {
         int index = 0;
-        for(int i = 0; i < storage.length; i++){
+        for(int i = 0; i < size; i++){
             if (storage[i]== null){
                 index = i;
                 break;
