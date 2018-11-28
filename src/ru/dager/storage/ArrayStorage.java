@@ -21,7 +21,7 @@ public class ArrayStorage extends AbstractArrayStorage {
     public void update(Resume r) {
         int index = getIndex(r.getUuid());
         if (index == -1) {
-            System.out.println("ru.dager.model.Resume " + r.getUuid() + " not exist");
+            System.out.println("Resume " + r.getUuid() + " not exist");
         } else {
             storage[index] = r;
         }
