@@ -1,14 +1,14 @@
 package ru.dager;
 
-import ru.dager.webapp.model.Resume;
-import ru.dager.webapp.storage.ArrayStorage;
+import ru.dager.model.Resume;
+import ru.dager.storage.ArrayStorage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Interactive test for ru.dager.webapp.storage.ArrayStorage implementation
+ * Interactive test for ru.dager.storage.ArrayStorage implementation
  * (just run, no need to understand)
  */
 public class MainArray {

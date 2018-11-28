@@ -1,6 +1,6 @@
-package ru.dager.webapp.storage;
+package ru.dager.storage;
 
-import ru.dager.webapp.model.Resume;
+import ru.dager.model.Resume;
 
 public interface Storage {
 

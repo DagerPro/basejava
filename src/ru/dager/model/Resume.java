@@ -1,4 +1,4 @@
-package ru.dager.webapp.model;
+package ru.dager.model;
 
 /**
  * Initial resume class

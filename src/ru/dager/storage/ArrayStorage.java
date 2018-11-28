@@ -1,6 +1,6 @@
-package ru.dager.webapp.storage;
+package ru.dager.storage;
 
-import ru.dager.webapp.model.Resume;
+import ru.dager.model.Resume;
 
 import java.util.Arrays;
 
@@ -21,7 +21,7 @@ public class ArrayStorage implements Storage {
     public void update(Resume r) {
         int index = getIndex(r.getUuid());
         if (index == -1) {
-            System.out.println("ru.dager.webapp.model.Resume " + r.getUuid() + " not exist");
+            System.out.println("ru.dager.model.Resume " + r.getUuid() + " not exist");
         } else {
             storage[index] = r;
         }
