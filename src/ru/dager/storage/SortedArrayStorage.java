@@ -15,14 +15,20 @@ public class SortedArrayStorage extends AbstractArrayStorage{
             for (int i = size; i < newIndex + 2; i--){
                 storage[i] = storage[i - 1];
                 storage[newIndex +1] = r;
+                size++;
             }
         }
-
     }
 
     @Override
     public void delete(String uuid) {
-
+        int newIndex = getIndex(uuid);
+        if (newIndex < 0) System.out.println("Resume " + uuid + " not exist");
+        else {
+            storage[newIndex + 1] = storage[size - 1];
+            storage[size - 1] = null;
+            size--;
+        }
     }
 
     @Override
