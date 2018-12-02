@@ -1,9 +1,8 @@
 package ru.dager.storage;
 
 public class ArrayStorageTest extends AbstractArrayStorageTest {
-    public ArrayStorageTest(Storage storage) {
-        super(storage);
-    }
 
-
+//    public ArrayStorageTest(ArrayStorage storage) {
+//        super(new ArrayStorage());
+//    }
 }
