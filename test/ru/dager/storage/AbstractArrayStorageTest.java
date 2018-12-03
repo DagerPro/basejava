@@ -6,28 +6,14 @@ import org.junit.Test;
 import ru.dager.exeption.NotExistStorageException;
 import ru.dager.model.Resume;
 
-public  class AbstractArrayStorageTest {
+public abstract class AbstractArrayStorageTest {
 
-    private Storage storage = new ArrayStorage();
-
-//    public AbstractArrayStorageTest(Storage storage) {
-//
-//        if (storage instanceof ArrayStorage){
-//            this.storage = new ArrayStorage();
-//        }
-//        if (storage instanceof SortedArrayStorage){
-//            this.storage = new SortedArrayStorage();
-//        }
-//    }
+    private Storage storage;
 
 
-//    public AbstractArrayStorageTest(ArrayStorage storage){
-//        this.storage = new ArrayStorage();
-//    }
-//
-//    public AbstractArrayStorageTest(SortedArrayStorage storage){
-//        this.storage = new SortedArrayStorage();
-//    }
+    public AbstractArrayStorageTest(Storage storage){
+        this.storage = storage;
+    }
 
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
@@ -53,7 +39,7 @@ public  class AbstractArrayStorageTest {
     }
 
     @Test
-    public void update() {
+    public void update(){
 
     }
 
@@ -72,10 +58,14 @@ public  class AbstractArrayStorageTest {
 
     @Test
     public void getAll() {
+        for(Resume r : storage.getAll()){
+            Assert.assertNotNull(r);
+        }
     }
 
     @Test
     public void get() {
+        Assert.assertSame(new Resume(UUID_1), storage.get(UUID_1));
     }
 
     @Test(expected = NotExistStorageException.class)
