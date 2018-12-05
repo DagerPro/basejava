@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.dager.exeption.ExistStorageException;
 import ru.dager.exeption.NotExistStorageException;
+import ru.dager.exeption.StorageException;
 import ru.dager.model.Resume;
 
 public abstract class AbstractArrayStorageTest {
@@ -12,7 +13,7 @@ public abstract class AbstractArrayStorageTest {
     private Storage storage;
 
 
-    public AbstractArrayStorageTest(Storage storage){
+    public AbstractArrayStorageTest(Storage storage) {
         this.storage = storage;
     }
 
@@ -40,8 +41,10 @@ public abstract class AbstractArrayStorageTest {
     }
 
     @Test
-    public void update(){
-
+    public void update() {
+        Resume newResume = new Resume(UUID_1);
+        storage.update(newResume);
+        Assert.assertTrue(newResume == storage.get(UUID_1));
     }
 
     @Test
@@ -57,7 +60,19 @@ public abstract class AbstractArrayStorageTest {
         storage.save(new Resume(UUID_1));
     }
 
-    @Test (expected = NotExistStorageException.class)
+    @Test(expected = StorageException.class)
+    public void saveOverflow() throws Exception {
+        try {
+            for (int i = 4; i <= AbstractArrayStorage.STORAGE_LIMIT; i++) {
+                storage.save(new Resume());
+            }
+        } catch (StorageException e) {
+            Assert.fail();
+        }
+        storage.save(new Resume());
+    }
+
+    @Test(expected = NotExistStorageException.class)
     public void delete() {
         storage.delete("uuid1");
         Assert.assertEquals(2, storage.size());
@@ -71,7 +86,7 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void getAll() {
-        for(Resume r : storage.getAll()){
+        for (Resume r : storage.getAll()) {
             Assert.assertNotNull(r);
         }
 
