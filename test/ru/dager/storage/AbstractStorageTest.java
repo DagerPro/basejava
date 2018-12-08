@@ -8,12 +8,12 @@ import ru.dager.exeption.NotExistStorageException;
 import ru.dager.exeption.StorageException;
 import ru.dager.model.Resume;
 
-public abstract class AbstractArrayStorageTest {
+public abstract class AbstractStorageTest {
 
     private Storage storage;
 
 
-    public AbstractArrayStorageTest(Storage storage) {
+    public AbstractStorageTest(Storage storage) {
         this.storage = storage;
     }
 
