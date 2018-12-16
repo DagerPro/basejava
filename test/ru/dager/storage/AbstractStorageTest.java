@@ -7,6 +7,9 @@ import ru.dager.exeption.ExistStorageException;
 import ru.dager.exeption.NotExistStorageException;
 import ru.dager.model.Resume;
 
+import java.util.Arrays;
+import java.util.List;
+
 public abstract class AbstractStorageTest {
 
     protected Storage storage;
@@ -72,16 +75,16 @@ public abstract class AbstractStorageTest {
     }
 
     @Test
-    public void getAll() {
-        for (Resume r : storage.getAll()) {
+    public void getAllSorted() {
+        for (Resume r : storage.getAllSorted()) {
             Assert.assertNotNull(r);
         }
 
-        Resume[] array = storage.getAll();
-        Assert.assertEquals(3, array.length);
-        Assert.assertEquals(new Resume(UUID_1, "name1"), array[0]);
-        Assert.assertEquals(new Resume(UUID_2, "name2"), array[1]);
-        Assert.assertEquals(new Resume(UUID_3, "name3"), array[2]);
+        List<Resume> list = storage.getAllSorted();
+        Assert.assertEquals(3, list.size());
+        Assert.assertEquals(list, Arrays.asList(new Resume(UUID_1, "name1"),
+                new Resume(UUID_2, "name2"),
+                new Resume(UUID_3, "name3")));
     }
 
     @Test
