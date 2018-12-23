@@ -1,5 +1,7 @@
 package ru.dager.model;
 
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -13,6 +15,10 @@ public class Resume implements Comparable<Resume> {
 
     private String fullName;
 
+    private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
+    private final Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
+
+
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
     }
@@ -22,6 +28,14 @@ public class Resume implements Comparable<Resume> {
         Objects.requireNonNull(fullName, "fullName must not be null");
         this.fullName = fullName;
         this.uuid = uuid;
+    }
+
+    public String getContact(ContactType type){
+        return contacts.get(type);
+    }
+
+    public Section getSection(SectionType type){
+        return sections.get(type);
     }
 
 
